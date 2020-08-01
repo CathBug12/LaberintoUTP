@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context=".MainActivity"
+
+    >
+
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="75dp"
+        android:layout_marginLeft="75dp"
+        android:layout_marginTop="224dp"
+        android:background="@drawable/r"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="@string/tv_name"
+        android:inputType="textPersonName"
+        android:paddingStart="18dp"
+        android:paddingLeft="16dp"
+        android:autofillHints=""
+        tools:ignore="RtlSymmetry" />
+
+    <Button
+        android:id="@+id/btn_start"
+        android:layout_width="137dp"
+        android:layout_height="52dp"
+        android:layout_below="@+id/et_name"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="131dp"
+        android:layout_marginLeft="131dp"
+        android:layout_marginTop="35dp"
+        android:background="@mipmap/bbb"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:text="@string/btn_start"
+        android:textColor="#4E4755"
+        android:textSize="18sp"
+        android:typeface="sans" />
+
+    <TextView
+        android:id="@+id/txt_name"
+        android:layout_width="match_parent"
+        android:layout_height="81dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginBottom="0dp"
+        android:paddingStart="18dp"
+        android:paddingLeft="18dp"
+        android:text="@string/txt_name"
+        android:textColor="#4E4755"
+        android:textSize="11.5sp" />
+</RelativeLayout>
