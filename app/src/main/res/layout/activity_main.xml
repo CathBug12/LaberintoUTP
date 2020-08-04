@@ -63,5 +63,6 @@
         android:paddingLeft="18dp"
         android:text="@string/txt_name"
         android:textColor="#4E4755"
-        android:textSize="11.5sp" />
+        android:textSize="12.5sp"
+        android:textStyle="bold" />
 </RelativeLayout>

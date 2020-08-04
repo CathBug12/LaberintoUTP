@@ -3,7 +3,8 @@
     <string name="tv_name">Ingrese su nombre</string>
     <string name="btn_start">COMENZAR</string>
     <string name="txt_name">
-        Elaborado por: \nCatherine Salguero Casani \nDocente: \nIng. Wilder Nina Choquehuayta
+        Docente: \nIng. Wilder Nina Choquehuayta
+        \nElaborado por: \nCatherine Salguero Casani
 
     </string>
 </resources>
