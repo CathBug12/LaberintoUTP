@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Environment;
 import android.view.View;
 import android.widget.ImageButton;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import model.Laberinto;
 import model.LaberintoElement;
@@ -25,12 +27,17 @@ public class intermedio extends AppCompatActivity {
             ib30, ib31, ib32, ib33, ib34, ib35, ib36,btn_inicio, b1;
     Laberinto laberinto;
     String name;
-    TextView tv_nameg;
+    TextView tv_nameg, tv_time;
     intermedio context;
+    private static final long START_TIME_IN_MILLIS=20000;
+    private CountDownTimer countDownTimer;
+    private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
+    private boolean mTimerRunning;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intermedio);
+        tv_time = findViewById(R.id.tv_time2);
         context=this;
         name= getIntent().getStringExtra("name_g");
         tv_nameg = (TextView) findViewById(R.id.tv_nameg);
@@ -44,8 +51,7 @@ public class intermedio extends AppCompatActivity {
                 if(isExternalStorageWritable()){
                     requestPermission();
                 }
-                Intent i = new Intent(getApplicationContext(),avanzado.class);
-                startActivity(i);
+
             }
         });
     }
@@ -178,5 +184,27 @@ public class intermedio extends AppCompatActivity {
 
     public void setLaberinto(Laberinto laberinto) {
         this.laberinto = laberinto;
+    }
+    public  void startTimer(){
+        countDownTimer = new CountDownTimer(mTimeLeftInMillis,2000) {
+            @Override
+            public void onTick(long l) {
+                mTimeLeftInMillis = l;
+                updateCountDownText();
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        }.start();
+        mTimerRunning=true;
+    }
+    private  void updateCountDownText(){
+        int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
+        int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
+
+        String timeLeftFormatted= String.format(Locale.getDefault(),"%02d:%02d",minutes,seconds);
+        tv_time.setText(timeLeftFormatted);
     }
 }

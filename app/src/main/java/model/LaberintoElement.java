@@ -1,6 +1,7 @@
 package model;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageButton;
@@ -72,21 +73,15 @@ public class LaberintoElement {
 
                         //   pos_current=pos_empty;
                         context.getLaberinto().setPos_empty(pos_correct);
+
+                        if(pos_correct==16){
+                            Toast.makeText(context,"Siguiente nivel", Toast.LENGTH_SHORT).show();
+                            Intent siguiente = new Intent(context, intermedio.class);
+                            context.startActivity(siguiente);
+                        }
                     }else{
                         Toast.makeText(context,"Movimiento no válido", Toast.LENGTH_SHORT).show();
                     }
-                /*    if (pos_empty > (pos_current + 2)) {
-                        Toast.makeText(context,"Movimiento no válido", Toast.LENGTH_SHORT).show();
-                    } else{
-                        context.getLaberinto().getListLaberintoElement().get(pos_correct-1).getImageButton().setBackground(drawableSrc);
-                        context.getLaberinto().getListLaberintoElement().get(pos_empty-1).getImageButton().setBackground(drawableDst);
-
-                        context.getLaberinto().getListLaberintoElement().get(pos_empty-1).setPos_current(pos_current);
-                        context.getLaberinto().getListLaberintoElement().get(pos_correct-1).setPos_current(pos_empty);
-
-                        //   pos_current=pos_empty;
-                        context.getLaberinto().setPos_empty(pos_correct);
-                    } */
                 }
             }
         });
@@ -101,16 +96,24 @@ public class LaberintoElement {
                 if(pos_empty != pos_correct){
                     Drawable drawableDst = context.getLaberinto().getListLaberintoElement().get(pos_current-1).getDrawable();
                     Drawable drawableSrc =context.getLaberinto().getListLaberintoElement().get(0).getDrawable();
+                    if(pos_correct==(pos_empty+1) || pos_correct==(pos_empty-1) || pos_correct==(pos_empty-6) || pos_correct==(pos_empty+6)){
+                        context.getLaberinto().getListLaberintoElement().get(pos_correct-1).getImageButton().setBackground(drawableSrc);
+                        context.getLaberinto().getListLaberintoElement().get(pos_empty-1).getImageButton().setBackground(drawableDst);
 
-                    context.getLaberinto().getListLaberintoElement().get(pos_correct-1).getImageButton().setBackground(drawableSrc);
-                    context.getLaberinto().getListLaberintoElement().get(pos_empty-1).getImageButton().setBackground(drawableDst);
+                        context.getLaberinto().getListLaberintoElement().get(pos_empty-1).setPos_current(pos_current);
+                        context.getLaberinto().getListLaberintoElement().get(pos_correct-1).setPos_current(pos_empty);
 
+                        //   pos_current=pos_empty;
+                        context.getLaberinto().setPos_empty(pos_correct);
 
-                    context.getLaberinto().getListLaberintoElement().get(pos_empty-1).setPos_current(pos_current);
-                    context.getLaberinto().getListLaberintoElement().get(pos_correct-1).setPos_current(pos_empty);
-
-                    //   pos_current=pos_empty;
-                    context.getLaberinto().setPos_empty(pos_correct);
+                        if(pos_correct==36){
+                            Toast.makeText(context,"Siguiente nivel", Toast.LENGTH_SHORT).show();
+                            Intent siguiente = new Intent(context, avanzado.class);
+                            context.startActivity(siguiente);
+                        }
+                    }else{
+                        Toast.makeText(context,"Movimiento no válido", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -125,16 +128,21 @@ public class LaberintoElement {
                 if(pos_empty != pos_correct){
                     Drawable drawableDst = context.getLaberinto().getListLaberintoElement().get(pos_current-1).getDrawable();
                     Drawable drawableSrc =context.getLaberinto().getListLaberintoElement().get(0).getDrawable();
+                    if(pos_correct==(pos_empty+1) || pos_correct==(pos_empty-1) || pos_correct==(pos_empty-8) || pos_correct==(pos_empty+8)){
+                        context.getLaberinto().getListLaberintoElement().get(pos_correct-1).getImageButton().setBackground(drawableSrc);
+                        context.getLaberinto().getListLaberintoElement().get(pos_empty-1).getImageButton().setBackground(drawableDst);
 
-                    context.getLaberinto().getListLaberintoElement().get(pos_correct-1).getImageButton().setBackground(drawableSrc);
-                    context.getLaberinto().getListLaberintoElement().get(pos_empty-1).getImageButton().setBackground(drawableDst);
+                        context.getLaberinto().getListLaberintoElement().get(pos_empty-1).setPos_current(pos_current);
+                        context.getLaberinto().getListLaberintoElement().get(pos_correct-1).setPos_current(pos_empty);
 
-
-                    context.getLaberinto().getListLaberintoElement().get(pos_empty-1).setPos_current(pos_current);
-                    context.getLaberinto().getListLaberintoElement().get(pos_correct-1).setPos_current(pos_empty);
-
-                    //   pos_current=pos_empty;
-                    context.getLaberinto().setPos_empty(pos_correct);
+                        //   pos_current=pos_empty;
+                        context.getLaberinto().setPos_empty(pos_correct);
+                        if(pos_correct==64){
+                            Toast.makeText(context,"FELICITACIONES, GANASTE", Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        Toast.makeText(context,"Movimiento no válido", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });

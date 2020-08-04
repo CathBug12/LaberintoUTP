@@ -4,18 +4,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import model.Laberinto;
 import model.LaberintoElement;
@@ -25,14 +29,23 @@ public class game extends AppCompatActivity {
     ib10, ib11, ib12, ib13, ib14, ib15, ib16, btn_inicio, b1;
     Laberinto laberinto;
     String name;
-    TextView tv_nameg;
+    TextView tv_nameg, tv_time;
     game context;
+    SharedPreferences mPreferences;
+    private static final long START_TIME_IN_MILLIS=20000;
+    private CountDownTimer countDownTimer;
+    private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
+    private boolean mTimerRunning;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        tv_time = findViewById(R.id.tv_time);
+
+        mPreferences = getSharedPreferences(MainActivity.sharedPrefFile, MODE_PRIVATE);
         context=this;
-        name= getIntent().getStringExtra("name_g");
+        name= getIntent().getStringExtra(MainActivity.KEY_NAME);
         tv_nameg = (TextView) findViewById(R.id.tv_nameg);
         tv_nameg.setText("Bienvenido " + name);
         initImages();
@@ -44,8 +57,12 @@ public class game extends AppCompatActivity {
                 if(isExternalStorageWritable()){
                     requestPermission();
                 }
-                Intent i = new Intent(getApplicationContext(),intermedio.class);
-                startActivity(i);
+                if(mTimerRunning){
+                    Toast.makeText(context,"", Toast.LENGTH_SHORT).show();
+
+                } else{
+                    startTimer();
+                }
             }
         });
         
@@ -137,5 +154,28 @@ public class game extends AppCompatActivity {
 
     public void setLaberinto(Laberinto laberinto) {
         this.laberinto = laberinto;
+    }
+
+    public  void startTimer(){
+        countDownTimer = new CountDownTimer(mTimeLeftInMillis,1000) {
+            @Override
+            public void onTick(long l) {
+                mTimeLeftInMillis = l;
+                updateCountDownText();
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        }.start();
+        mTimerRunning=true;
+    }
+    private  void updateCountDownText(){
+        int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
+        int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
+
+        String timeLeftFormatted= String.format(Locale.getDefault(),"%02d:%02d",minutes,seconds);
+        tv_time.setText(timeLeftFormatted);
     }
 }
