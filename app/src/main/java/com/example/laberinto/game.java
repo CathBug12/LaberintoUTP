@@ -3,6 +3,7 @@ package com.example.laberinto;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -43,6 +44,8 @@ public class game extends AppCompatActivity {
                 if(isExternalStorageWritable()){
                     requestPermission();
                 }
+                Intent i = new Intent(getApplicationContext(),intermedio.class);
+                startActivity(i);
             }
         });
         
